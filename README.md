@@ -9,7 +9,7 @@ Overview of your project
 * Have json-server installed
 
 ### Installation Instructions 
-* Fork abd clone
+* Fork and clone
 * Run json-server for db.json
 * Open index.html in browser
 
