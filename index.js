@@ -1,8 +1,8 @@
 const firstGen = 151;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // fetchPokemon();
     fetchAllPokemon();
+    // activateModal();
 })
 
 const fetchAllPokemon = () => {
@@ -14,20 +14,86 @@ const fetchAllPokemon = () => {
         .then(pokemonData => {
             let pokemonContainer = document.querySelector('#pokemon-container');
 
-            let card = document.createElement('div');
-            let image = document.createElement('img');
-            let id = document.createElement('h2');
-            let name = document.createElement('h2');
-        
-            id.innerText = pokemonData.id;
-            name.innerText = pokemonData.name[0].toUpperCase() + pokemonData.name.slice(1);
-            image.src = pokemonData.sprites.front_default;
+            let pokemonCard = document.createElement('div');
+            pokemonCard.classList.add("pokemon-card")
+            let pokemonImage = document.createElement('img');
+            pokemonImage.classList.add("pokemon-image")
+            let pokemonNumber = document.createElement('h2');
+            pokemonNumber.classList.add("pokemon-number")
+            let pokemonName = document.createElement('h3');
+            pokemonName.classList.add("pokemon-name");
 
-            card.append(image, id, name);
-            pokemonContainer.append(card);
-        })
+            pokemonNumber.innerText = pokemonData.id.toString().padStart(3, '0');
+            pokemonName.innerText = pokemonData.name[0].toUpperCase() + pokemonData.name.slice(1);
+            pokemonImage.src = pokemonData.sprites.front_default;
+
+            pokemonCard.append(pokemonImage, pokemonNumber, pokemonName);
+            pokemonContainer.append(pokemonCard);
+         
+            // activateModal(pokemonData);
+
+            let modal = document.querySelector('#myModal');
+            let modalImage = document.querySelector('#img01');
+            let close = document.querySelector(".close");   
+            
+            pokemonImage.onclick = function () {
+            modal.style.display = "block";
+            modalImage.src = pokemonData.sprites.back_default;
+            }
+
+            close.onclick = () => {
+                modal.style.display = "none";
+            }
+
+            // pokemonImage.addEventListener('click', () => {
+            //     modal.showModal();
+            // })
+        })  
     }
 }
+
+const activateModal = (poke) => {
+    
+    let close = document.querySelector(".close");   
+                 
+    poke.onclick = () => {
+    poke.modal.style.display = "block";
+    poke.modalImage.src = pokemonData.sprites.back_default;
+    }
+
+    close.onclick = () => {
+        modal.style.display = "none";
+    }
+}
+
+// const closeModal = () => {
+   
+// }
+
+
+// function renderPokemon(pokemon){
+    
+//     pokemon.forEach(poke => {
+
+//             let pokemonContainer = document.querySelector('#pokemon-container');
+
+//             let pokemonCard = document.createElement('div');
+//             pokemonCard.classList.add("pokemon-card")
+//             let pokemonImage = document.createElement('img');
+//             pokemonImage.classList.add("pokemon-image")
+//             let pokemonNumber = document.createElement('h2');
+//             pokemonNumber.classList.add("pokemon-number")
+//             let pokemonName = document.createElement('h3');
+//             pokemonName.classList.add("pokemon-name")
+
+//             pokemonNumber.innerText = poke.id;
+//             pokemonName.innerText = poke.name[0].toUpperCase() + pokemonData.name.slice(1);
+//             pokemonImage.src = pokemonData.sprites.front_default;
+
+//             pokemonCard.append(pokemonImage, pokemonNumber, pokemonName);
+//             pokemonContainer.append(pokemonCard);
+//     })
+// }
 
 
 // const fetchPokemon = () => {
