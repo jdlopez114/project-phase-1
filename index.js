@@ -5,8 +5,8 @@ const pokeArr = [];
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllPokemon();
     // activateModal()
-    formSearch();
-    // searchBar();
+    // formSearch();
+    searchBar();
 })
 
 const fetchAllPokemon = () => {
@@ -19,6 +19,7 @@ const fetchAllPokemon = () => {
 }
 
 const renderPokemon = (pokemon) => {
+
     let pokemonContainer = document.querySelector('#pokemon-container');
     let pokemonCard = document.createElement('div');
     pokemonCard.classList.add("pokemon-card")
@@ -54,6 +55,8 @@ const renderPokemon = (pokemon) => {
     closeModal.addEventListener('click', () => {
         modal.style.display = "none";
     })
+
+    
 }
 
 // const activateModal = (pokemon) => {
@@ -85,30 +88,31 @@ const renderPokemon = (pokemon) => {
 //     modal.style.display = "none";
 // }
 
-const formSearch = () => {
-    let inputForm = document.querySelector('form');
-    let searchByName = document.querySelector('#searchByName');
+// const formSearch = () => {
+//     let inputForm = document.querySelector('form');
+//     let searchByName = document.querySelector('#searchByName');
 
-        inputForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            searchByName.value = "";
-            let input = e.target.value;
-            let filteredPoke = pokeArr.filter(poke => {
-            poke.name.toLowerCase().includes(input);
-        });
-        renderPokemon(filteredPoke);
-    })
-}
+//         inputForm.addEventListener('submit', (e) => {
+//             e.preventDefault();
+//             searchByName.value = "";
 
-// const searchBar = () => {
-//     const searchBar = document.querySelector('#searchByName');
-
-//     searchBar.addEventListener('keyup', (e) => {
-//         console.log(e)
-//         const input = e.target.value.toLowerCase();
-//         const filteredPoke = pokeArr.filter(poke => {
-//             return poke.name.includes(input);
+//             let input = e.target.value;
+//             let filteredPoke = pokeArr.filter(poke => {
+//                 return poke.name.toLowerCase().includes(input);
 //         });
-//         renderPokemon(filteredPoke)
+//         renderPokemon(filteredPoke);
 //     })
 // }
+
+const searchBar = () => {
+    let searchBar = document.querySelector('#searchByName');
+
+    searchBar.addEventListener('keyup', (e) => {
+        let input = e.target.value.toLowerCase();
+        let filteredPoke = pokeArr.filter(poke => {
+            return poke.name.includes(input);
+        });
+        console.log(filteredPoke)
+        // renderPokemon(filteredPoke);
+    })
+}
