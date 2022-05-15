@@ -1,10 +1,12 @@
 const firstGen = 151;
-let pokeArr = [];
+const pokeArr = [];
 
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllPokemon();
     // activateModal()
+    formSearch();
+    // searchBar();
 })
 
 const fetchAllPokemon = () => {
@@ -29,21 +31,26 @@ const renderPokemon = (pokemon) => {
     
     pokemonNumber.innerText = pokemon.id.toString().padStart(3, '0');
     pokemonName.innerText = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+    // pokemonNumber.innerText = pokemon.id;
+    // pokemonName.innerText = pokemon.name;
     pokemonImage.src = pokemon.sprites.front_default;
 
     pokemonCard.append(pokemonImage, pokemonNumber, pokemonName);
     pokemonContainer.append(pokemonCard);
 
     // activateModal(pokemon);
-    let modal = document.querySelector('#myModal');
+    
     let modalImage = document.querySelector('#img01');
     let closeModal = document.querySelector(".close"); 
+    let modal = document.querySelector('#myModal');
 
+//     pokemonImage.addEventListener('click', open)
     pokemonImage.addEventListener('click', () => {
         modal.style.display = "block";
         modalImage.src = pokemon.sprites.back_default;
-    })
+    })       
 
+//     closeModal.addEventListener('click', close)
     closeModal.addEventListener('click', () => {
         modal.style.display = "none";
     })
@@ -65,12 +72,43 @@ const renderPokemon = (pokemon) => {
 //     closeModal.addEventListener('click', () => {
 //         modal.style.display = "none";
 //     })
+// }
 
-//     // pokemonImage.onclick = () => {
-        
-//     // }
 
-//     // closeModal.onclick = () => {
-        
-//     // }
+
+// const open = () => {
+//     modal.style.display = "block";
+//     this.modalImage.src = pokemon.sprites.back_default;
+// }
+
+// const close = () => {
+//     modal.style.display = "none";
+// }
+
+const formSearch = () => {
+    let inputForm = document.querySelector('form');
+    let searchByName = document.querySelector('#searchByName');
+
+        inputForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            searchByName.value = "";
+            let input = e.target.value;
+            let filteredPoke = pokeArr.filter(poke => {
+            poke.name.toLowerCase().includes(input);
+        });
+        renderPokemon(filteredPoke);
+    })
+}
+
+// const searchBar = () => {
+//     const searchBar = document.querySelector('#searchByName');
+
+//     searchBar.addEventListener('keyup', (e) => {
+//         console.log(e)
+//         const input = e.target.value.toLowerCase();
+//         const filteredPoke = pokeArr.filter(poke => {
+//             return poke.name.includes(input);
+//         });
+//         renderPokemon(filteredPoke)
+//     })
 // }
