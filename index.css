@@ -1,4 +1,5 @@
 body {
+    background-color: rgba(241, 221, 220, 0.764);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,7 +117,6 @@ body {
     to {transform:scale(1)}
   }
   
-  /* The Close Button */
   .close {
     position: absolute;
     top: 15px;
