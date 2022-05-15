@@ -4,6 +4,7 @@ let pokeArr = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllPokemon();
+    // activateModal()
 })
 
 const fetchAllPokemon = () => {
@@ -14,8 +15,6 @@ const fetchAllPokemon = () => {
         .then(pokeData => renderPokemon(pokeData))
     }
 }
-
-
 
 const renderPokemon = (pokemon) => {
     let pokemonContainer = document.querySelector('#pokemon-container');
@@ -35,17 +34,43 @@ const renderPokemon = (pokemon) => {
     pokemonCard.append(pokemonImage, pokemonNumber, pokemonName);
     pokemonContainer.append(pokemonCard);
 
+    // activateModal(pokemon);
     let modal = document.querySelector('#myModal');
     let modalImage = document.querySelector('#img01');
-    let closeModal = document.querySelector(".close");   
-    
-    pokemonImage.onclick = () => {
+    let closeModal = document.querySelector(".close"); 
+
+    pokemonImage.addEventListener('click', () => {
         modal.style.display = "block";
         modalImage.src = pokemon.sprites.back_default;
-    }
+    })
 
-    closeModal.onclick = () => {
+    closeModal.addEventListener('click', () => {
         modal.style.display = "none";
-    }
+    })
 }
 
+// const activateModal = (pokemon) => {
+//     let pokemonImage = document.querySelector("pokemon-image");
+//     let modal = document.querySelector('#myModal');
+//     let modalImage = document.querySelector('#img01');
+//     let closeModal = document.querySelector(".close"); 
+    
+//     console.log(pokemonImage)
+    
+//     pokemonImage.addEventListener('click', () => {
+//         modal.style.display = "block";
+//         modalImage.src = pokemon.sprites.back_default;
+//     })
+
+//     closeModal.addEventListener('click', () => {
+//         modal.style.display = "none";
+//     })
+
+//     // pokemonImage.onclick = () => {
+        
+//     // }
+
+//     // closeModal.onclick = () => {
+        
+//     // }
+// }
