@@ -1,16 +1,16 @@
 # Project Name
-No working title as of now 
+Shiny 1st Gen Pokemon
 
 Overview of your project
-    Details
-    Purpose
+    Why use the endless upon endless of unlimited resources available at your fingertips, when you can go here and get what you're looking for in one click.
+
+    The purpose of this project, is to click on a pokemon, and get the shiny version of it on your screen.
 
 ### Requirements 
-* Have json-server installed
+None.
 
 ### Installation Instructions 
 * Fork and clone
-* Run json-server for db.json
 * Open index.html in browser
 
 
