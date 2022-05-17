@@ -1,12 +1,10 @@
 const firstGen = 151;
-const pokeArr = [];
+let pokeArr = [];
 
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllPokemon();
-    // activateModal()
-    // formSearch();
-    searchBar();
+    searchPokemon();
 })
 
 const fetchAllPokemon = () => {
@@ -19,100 +17,87 @@ const fetchAllPokemon = () => {
 }
 
 const renderPokemon = (pokemon) => {
-
     let pokemonContainer = document.querySelector('#pokemon-container');
     let pokemonCard = document.createElement('div');
     pokemonCard.classList.add("pokemon-card")
     let pokemonImage = document.createElement('img');
     pokemonImage.classList.add("pokemon-image")
-    let pokemonNumber = document.createElement('h2');
-    pokemonNumber.classList.add("pokemon-number")
-    let pokemonName = document.createElement('h3');
-    pokemonName.classList.add("pokemon-name");
-    
-    pokemonNumber.innerText = pokemon.id.toString().padStart(3, '0');
-    pokemonName.innerText = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-    // pokemonNumber.innerText = pokemon.id;
-    // pokemonName.innerText = pokemon.name;
+
     pokemonImage.src = pokemon.sprites.front_default;
 
-    pokemonCard.append(pokemonImage, pokemonNumber, pokemonName);
+    pokemonCard.append(pokemonImage)
     pokemonContainer.append(pokemonCard);
 
-    // activateModal(pokemon);
-    
     let modalImage = document.querySelector('#img01');
     let closeModal = document.querySelector(".close"); 
     let modal = document.querySelector('#myModal');
+    let modalType = document.querySelector('.modal-type');
+    let modalId = document.querySelector('.modal-id');
+    let modalName = document.querySelector('.modal-name');
 
-//     pokemonImage.addEventListener('click', open)
     pokemonImage.addEventListener('click', () => {
         modal.style.display = "block";
-        modalImage.src = pokemon.sprites.back_default;
+        modalImage.src = pokemon.sprites.front_shiny;
+        modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
+        modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
+        modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
     })       
 
-//     closeModal.addEventListener('click', close)
     closeModal.addEventListener('click', () => {
         modal.style.display = "none";
     })
-
-    
 }
 
-// const activateModal = (pokemon) => {
-//     let pokemonImage = document.querySelector("pokemon-image");
-//     let modal = document.querySelector('#myModal');
-//     let modalImage = document.querySelector('#img01');
-//     let closeModal = document.querySelector(".close"); 
-    
-//     console.log(pokemonImage)
-    
-//     pokemonImage.addEventListener('click', () => {
-//         modal.style.display = "block";
-//         modalImage.src = pokemon.sprites.back_default;
-//     })
 
-//     closeModal.addEventListener('click', () => {
-//         modal.style.display = "none";
-//     })
-// }
+const searchPokemon = () => {
+    const inputForm = document.querySelector('form');
+    inputForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
+        const input = document.querySelector('input#searchByName');
+        const pokeContainer = document.querySelector('#pokemon-container')
 
+        fetch(`https://pokeapi.co/api/v2/pokemon/${input.value}`)
+        .then(res => res.json())
+        .then(pokemonData => {
+      
+            console.log(pokeContainer)
+        pokeContainer.style.display = "none"
+        renderOnePokemon(pokemonData)
+        input.value = '';
+        })
+    }); 
+}
 
-// const open = () => {
-//     modal.style.display = "block";
-//     this.modalImage.src = pokemon.sprites.back_default;
-// }
+const renderOnePokemon = (pokemon) => {
 
-// const close = () => {
-//     modal.style.display = "none";
-// }
+    let pokemonContainer = document.querySelector('#pokemon-container2');
+    let pokemonCard = document.createElement('div');
+    pokemonCard.classList.add("pokemon-card")
+    let pokemonImage = document.createElement('img');
+    pokemonImage.classList.add("pokemon-image")
 
-// const formSearch = () => {
-//     let inputForm = document.querySelector('form');
-//     let searchByName = document.querySelector('#searchByName');
+    pokemonImage.src = pokemon.sprites.front_default;
 
-//         inputForm.addEventListener('submit', (e) => {
-//             e.preventDefault();
-//             searchByName.value = "";
+    pokemonCard.append(pokemonImage)
+    pokemonContainer.append(pokemonCard);
 
-//             let input = e.target.value;
-//             let filteredPoke = pokeArr.filter(poke => {
-//                 return poke.name.toLowerCase().includes(input);
-//         });
-//         renderPokemon(filteredPoke);
-//     })
-// }
+    let modalImage = document.querySelector('#img01');
+    let closeModal = document.querySelector(".close"); 
+    let modal = document.querySelector('#myModal');
+    let modalType = document.querySelector('.modal-type');
+    let modalId = document.querySelector('.modal-id');
+    let modalName = document.querySelector('.modal-name');
 
-const searchBar = () => {
-    let searchBar = document.querySelector('#searchByName');
+    pokemonImage.addEventListener('click', () => {
+        modal.style.display = "block";
+        modalImage.src = pokemon.sprites.front_shiny;
+        modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
+        modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
+        modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
+    })       
 
-    searchBar.addEventListener('keyup', (e) => {
-        let input = e.target.value.toLowerCase();
-        let filteredPoke = pokeArr.filter(poke => {
-            return poke.name.includes(input);
-        });
-        console.log(filteredPoke)
-        // renderPokemon(filteredPoke);
+    closeModal.addEventListener('click', () => {
+        modal.style.display = "none";
     })
 }
