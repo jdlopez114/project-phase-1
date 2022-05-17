@@ -7,15 +7,21 @@
 </head>
 <body>
     <header> 
-        <h1>Click for Shiny</h1>
+        <h1>Shiny Search</h1>
     </header>
-    <div id='pokemon-container'></div>
 
+   <form>
+      <label for="searchByID">Search By ID</label>
+      <input id="searchByName" type="text" placeholder="Enter ID here"/>
+      <input type="submit" />
+    </form>
+    <div id='pokemon-container'></div>
+    <div id="pokemon-container2"></div>
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
         <img class="modal-content" id="img01">
         <div class="modal-container">
-            <h3 class="modal-id"></h3>
+            <h2 class="modal-id"></h2>
             <h2 class="modal-name"></h2>
             <h2 class="modal-type"></h2>
         </div>
