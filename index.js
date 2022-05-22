@@ -1,6 +1,5 @@
 const firstGen = 151;
-let pokeArr = [];
-
+let pokeIdArr = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllPokemon();
@@ -8,12 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const fetchAllPokemon = () => {
+    
     for (let i = 1; i <= firstGen; i++){
         const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+
         fetch(url)
         .then(res => res.json())
-        .then(pokeData => renderPokemon(pokeData))
+        .then(pokeData => {
+            const onePokemon = renderPokemon(pokeData)
+            pokeIdArr[i] = onePokemon;
+
+        }); 
     }
+    console.log(pokeIdArr)
 }
 
 const renderPokemon = (pokemon) => {
@@ -56,8 +62,9 @@ const searchPokemon = () => {
 
         const input = document.querySelector('input#searchByName');
         const pokeContainer = document.querySelector('#pokemon-container')
+        const id = input.value;
 
-        fetch(`https://pokeapi.co/api/v2/pokemon/${input.value}`)
+        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
         .then(res => res.json())
         .then(pokemonData => {
       
