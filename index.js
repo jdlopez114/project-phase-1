@@ -1,11 +1,11 @@
 const firstGen = 151;
-let pokeIdArr = [];
+// let pokeIdArr = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAllPokemon();
     searchPokemon();
-    displayModal();
-    closeModal();
+    // displayModal();
+    // closeModal();
 })
 
 const fetchAllPokemon = () => {
@@ -15,13 +15,15 @@ const fetchAllPokemon = () => {
 
         fetch(url)
         .then(res => res.json())
-        .then(pokeData => {
-            const onePokemon = renderPokemon(pokeData)
-            pokeIdArr[i] = onePokemon;
+        .then(pokeData => renderPokemon(pokeData))
 
-        }); 
+        // .then(pokeData => {
+            // const onePokemon = renderPokemon(pokeData)
+            // pokeIdArr[i] = onePokemon;
+
+        // }); 
     }
-    console.log(pokeIdArr)
+    // console.log(pokeIdArr)
 }
 
 const renderPokemon = (pokemon) => {
@@ -43,17 +45,17 @@ const renderPokemon = (pokemon) => {
     let modalId = document.querySelector('.modal-id');
     let modalName = document.querySelector('.modal-name');
 
-    // pokemonImage.addEventListener('click', () => {
-    //     modal.style.display = "block";
-    //     modalImage.src = pokemon.sprites.front_shiny;
-    //     modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
-    //     modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
-    //     modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
-    // })       
+    pokemonImage.addEventListener('click', () => {
+        modal.style.display = "block";
+        modalImage.src = pokemon.sprites.front_shiny;
+        modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
+        modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
+        modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
+    })       
 
-    // closeModal.addEventListener('click', () => {
-    //     modal.style.display = "none";
-    // })
+    closeModal.addEventListener('click', () => {
+        modal.style.display = "none";
+    })
 }
 
 
@@ -74,7 +76,7 @@ const searchPokemon = () => {
         .then(res => res.json())
         .then(pokemonData => {
       
-            console.log(pokeContainer)
+            // console.log(pokeContainer)
         pokeContainer.style.display = "none"
         renderOnePokemon(pokemonData)
         input.value = '';
@@ -102,27 +104,6 @@ const renderOnePokemon = (pokemon) => {
     let modalId = document.querySelector('.modal-id');
     let modalName = document.querySelector('.modal-name');
 
-    // pokemonImage.addEventListener('click', () => {
-    //     modal.style.display = "block";
-    //     modalImage.src = pokemon.sprites.front_shiny;
-    //     modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
-    //     modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
-    //     modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
-    // })       
-
-    // closeModal.addEventListener('click', () => {
-    //     modal.style.display = "none";
-    // })
-}
-
-const displayModal = (pokemon) => { 
-    const pokemonImage = document.querySelector('.pokemon-image')
-    let modalImage = document.querySelector('#img01');
-    let modal = document.querySelector('#myModal');
-    let modalType = document.querySelector('.modal-type');
-    let modalId = document.querySelector('.modal-id');
-    let modalName = document.querySelector('.modal-name');
-
     pokemonImage.addEventListener('click', () => {
         modal.style.display = "block";
         modalImage.src = pokemon.sprites.front_shiny;
@@ -130,11 +111,32 @@ const displayModal = (pokemon) => {
         modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
         modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
     })       
-}
 
-const closeModal = () => {
-    let closeModal = document.querySelector(".close"); 
     closeModal.addEventListener('click', () => {
         modal.style.display = "none";
     })
 }
+
+// const displayModal = (pokemon) => { 
+//     const pokemonImage = document.querySelector('.pokemon-image')
+//     let modalImage = document.querySelector('#img01');
+//     let modal = document.querySelector('#myModal');
+//     let modalType = document.querySelector('.modal-type');
+//     let modalId = document.querySelector('.modal-id');
+//     let modalName = document.querySelector('.modal-name');
+
+//     pokemonImage.addEventListener('click', () => {
+//         modal.style.display = "block";
+//         modalImage.src = pokemon.sprites.front_shiny;
+//         modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
+//         modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
+//         modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
+//     })       
+// }
+
+// const closeModal = () => {
+//     let closeModal = document.querySelector(".close"); 
+//     closeModal.addEventListener('click', () => {
+//         modal.style.display = "none";
+//     })
+// }
