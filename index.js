@@ -59,8 +59,7 @@ const searchPokemon = () => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
         .then(res => res.json())
         .then(pokemonData => {
-      
-            // console.log(pokeContainer)
+
         pokeContainer.style.display = "none"
         renderOnePokemon(pokemonData)
         input.value = '';
@@ -69,7 +68,6 @@ const searchPokemon = () => {
 }
 
 const renderOnePokemon = (pokemon) => {
-
     let pokemonContainer = document.querySelector('#pokemon-container2');
     let pokemonCard = document.createElement('div');
     pokemonCard.classList.add("pokemon-card")
@@ -100,26 +98,3 @@ const renderOnePokemon = (pokemon) => {
         modal.style.display = "none";
     })
 }
-
-// const displayModal = (pokemon) => { 
-    
-//     let pokemonImage = document.querySelector('.pokemon-image')
-//     let modalImage = document.querySelector('#img01');
-//     let modal = document.querySelector('#myModal');
-//     let modalType = document.querySelector('.modal-type');
-//     let modalId = document.querySelector('.modal-id');
-//     let modalName = document.querySelector('.modal-name');
-//     let close = document.querySelector(".close"); 
-
-//     pokemonImage.addEventListener('click', () => {
-//         modal.style.display = "block";
-//         modalImage.src = pokemon.sprites.front_shiny;
-//         modalId.innerText = `Number: ${pokemon.id.toString().padStart(3, '0')}`;
-//         modalName.innerText = `Name: ${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}`;
-//         modalType.innerText = `Types: ${pokemon.types.map(type => type.type.name[0].toUpperCase() + type.type.name.slice(1)).join(", ")}`
-//     })       
-
-//     close.addEventListener('click', () => {
-//         modal.style.display = "none";
-//     })
-// }
