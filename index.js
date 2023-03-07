@@ -53,15 +53,16 @@ const searchPokemon = () => {
         e.preventDefault();
 
         const input = document.querySelector('input#searchByName');
-        const pokeContainer = document.querySelector('#pokemon-container')
+        const pokeContainer = document.querySelector('#pokemon-container');
         const id = input.value;
 
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
         .then(res => res.json())
         .then(pokemonData => {
 
-        pokeContainer.style.display = "none"
-        renderOnePokemon(pokemonData)
+        // pokeContainer.style.display = "none"
+        pokeContainer.innerHTML = "";
+        renderPokemon(pokemonData)
         input.value = '';
         })
     }); 
